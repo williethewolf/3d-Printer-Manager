@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{{page_name}} | 3D Printer Collector</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+    </head>
+    <body>
+        <header class="navbar-fixed">
+            <ul id="adddropdown" class="dropdown-content">
+                <li><a href="{% url 'printer_create' %}">Add a printer</a></li>
+                <li><a href="{% url 'filament_create' %}">Add a filament</a></li>
+            </ul>
+            <ul id="viewdropdown" class="dropdown-content">
+                <li><a href="/printers">View my Printers</a></li>
+                <li><a href="/filaments">View my filaments</a></li>
+                <li><a href="/prints">View my prints</a></li>
+            </li>
+            </ul>
+            <nav class= "orange darken-1">
+                <div class="nav-wrapper">
+                    <ul>
+                        <li>
+                            <a href="/" class="left brand-logo">3D Printer Collector</a>
+                        </li>
+                    </ul>
+                    <ul class="right">
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="adddropdown">Add<i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="viewdropdown">View<i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main class="container">
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer class="page-footer orange darken-1">
+            <div class="right">
+                All Rights Reserved, &copy; 2022 3D Printer Collector &nbsp;
+            </div>
+        </footer>
+        <script async defer>
+            {% comment %} drop down code {% endcomment %}
+            var dropdowns = document.querySelectorAll('.dropdown-trigger')
+            for (var i = 0; i < dropdowns.length; i++){
+                M.Dropdown.init(dropdowns[i]);
+            }
+            
+        </script>
+    </body>
+</html>

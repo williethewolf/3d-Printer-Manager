@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Printer Details</h1>
+
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class = "card-content">
+                <span class = "card-title h2"> {{printer.maker}} {{printer.model}}</span>
+                <img src="" alt="{{printer.maker}} {{printer.model}} image">
+                <p> Maker: {{printer.maker}}</p>
+                <p> Model: {{printer.model}}</p>
+                <p> Build volume (X,Y,Z): <span>{{printer.build_volume_X}}x{{printer.build_volume_Y}}x{{printer.build_volume_Z}} mm</span></p>
+                <p> Print materials: {{printer.print_materials}}</p>
+                <p> Usage: {{printer.usage}}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'printer_update' printer.id %}">Edit</a>
+                <a href="{% url 'printer_delete' printer.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+    <div class="col s6">
+        <form action="{% url 'add_print' printer.id %}" method="post">
+            {% csrf_token %}
+            {{print_form.as_p}}
+            <input class="btn" type="submit" value="Add Print">
+        </form>
+        
+        <table class="stripped">
+            <thead>
+                <tr>
+
+                    <th>Print</th>
+                    <th>Filament</th>
+                    <th>Nozzle temp</th>
+                    <th>Nozzle size</th>
+                    <th>Layer Height</th>
+                    <th>Other Settings</th>
+                    <th>Print Time (in mins)</th>
+                    <th>Result</th>
+                    {% comment %} maybe have photo field here for each print{% endcomment %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for print in printer.print_set.all %}
+                
+                {% comment %} {% with hours = print.print_time // 60
+                minutes = print.print_time % 60
+                print_time_string ="{}h:{}m".format(hours, minutes)%} {% endcomment %}
+                    
+                
+                    <tr>
+                        <td>{{print.print}}</td>
+                        <td>{{print.filament}}</td>
+                        <td>{{print.nozzle_temp}}</td>
+                        <td>{{print.nozzle_size}}</td>
+                        <td>{{print.layer_height}}</td>
+                        <td>{{print.other_settings}}</td> 
+                        <td>{{print.print_time}}</td> 
+                        <td>{{print.get_completed_display}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    const selectFilament = document.getElementById('id_filament')
+    M.FormSelect.init(selectFilament)
+</script>
+{% endblock %}
+
+

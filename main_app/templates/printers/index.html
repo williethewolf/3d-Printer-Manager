@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Index of 3D printers</h1>
+    {% for printer in printers %}
+    <a href="/printers/{{ printer.id }}">
+        <div class="card">
+            <div class = "card-content">
+                <span class = "card-title"> {{printer.model}}</span>
+                <img src="" alt="{{printer.model}} image">
+                <p> Maker: {{printer.maker}}</p>
+                <p> Model: {{printer.model}}</p>
+                <p> Build volume (X,Y,Z): <span>{{printer.build_volume_X}}x{{printer.build_volume_Y}}x{{printer.build_volume_Z}} mm</span></p>
+                <p> Print materials: {{printer.print_materials}}</p>
+                <p> Usage: {{printer.usage}}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+{% endblock %}

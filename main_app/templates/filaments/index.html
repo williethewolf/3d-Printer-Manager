@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Index of filaments</h1>
+    {% for filament in filaments %}
+    <a href="/filaments/{{ filament.id }}">
+        <div class="card">
+            <div class = "card-content">
+                <span class = "card-title h2"> {{filament.maker}} {{filament.material}}</span>
+                <img src="" alt="{{filament.maker}} {{filament.material}} image">
+                <p> Maker: {{filament.maker}}</p>
+                <p> Material: {{filament.material}}</p>
+                <p> Color: {{filament.color}}</p>
+                <p> Diameter: {{filament.diameter}}</p>
+                <p> Weight: {{filament.weight}}</p>
+                <p> Optimal temps: {{filament.temps}}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+{% endblock %}

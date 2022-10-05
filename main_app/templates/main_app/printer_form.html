@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if object %}
+    <h1> Edit printer</h1>
+    <h4>{{object.name}}</h4>
+    {% else %}
+    <h1>Add new printer</h1>
+    {% endif %}
+
+        <form action="" method="POST">
+            {% csrf_token%}
+            <table>
+                {{form.as_table}}
+            </table>
+            {% if object %}
+            <input class="btn yellow" type="submit" value="Edit printer">
+            {% else %}
+            <input class="btn green" type="submit" value="Add printer">
+            {% endif %}
+        </form>
+{% endblock  %}

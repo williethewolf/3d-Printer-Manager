@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if object %}
+    <h1> Edit filament</h1>
+    <h4>{{object.name}}</h4>
+    {% else %}
+    <h1>Add new filament</h1>
+    {% endif %}
+
+        <form action="" method="POST">
+            {% csrf_token%}
+            <table>
+                {{form.as_table}}
+            </table>
+            {% if object %}
+            <input class="btn yellow" type="submit" value="Edit filament">
+            {% else %}
+            <input class="btn green" type="submit" value="Add filament">
+            {% endif %}
+        </form>
+{% endblock  %}
